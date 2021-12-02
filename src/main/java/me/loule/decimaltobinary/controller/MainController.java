@@ -3,6 +3,8 @@ package me.loule.decimaltobinary.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import me.loule.decimaltobinary.model.BinaryToDecimal;
+import me.loule.decimaltobinary.model.DecimalToBinary;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,11 +22,15 @@ public class MainController implements Initializable {
         System.out.println("MainController initialized");
 
         textFieldDecimal.setOnKeyReleased(event -> {
-            textFieldBinary.setText(convertDecimalToBinary(Integer.parseInt(textFieldDecimal.getText())));
+            DecimalToBinary decimalToBinary = new DecimalToBinary(Integer.parseInt(textFieldDecimal.getText()));
+
+            textFieldBinary.setText(decimalToBinary.result());
         });
 
         textFieldBinary.setOnKeyReleased(event -> {
-            textFieldDecimal.setText(convertBinaryToDecimal(Integer.parseInt(textFieldBinary.getText())));
+            BinaryToDecimal binaryToDecimal = new BinaryToDecimal(Integer.parseInt(textFieldBinary.getText()));
+
+            textFieldDecimal.setText(binaryToDecimal.result());
         });
     }
 
