@@ -8,6 +8,7 @@ import me.loule.decimaltobinary.model.DecimalToBinary;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -22,15 +23,23 @@ public class MainController implements Initializable {
         System.out.println("MainController initialized");
 
         textFieldDecimal.setOnKeyReleased(event -> {
-            DecimalToBinary decimalToBinary = new DecimalToBinary(Integer.parseInt(textFieldDecimal.getText()));
+            if (!Objects.equals(textFieldDecimal.getText(), "") && textFieldDecimal.getText().length() <= 3) {
+                DecimalToBinary decimalToBinary = new DecimalToBinary(Integer.parseInt(textFieldDecimal.getText()));
 
-            textFieldBinary.setText(decimalToBinary.result());
+                textFieldBinary.setText(decimalToBinary.result());
+            } else {
+                textFieldBinary.setText("");
+            }
         });
 
         textFieldBinary.setOnKeyReleased(event -> {
-            BinaryToDecimal binaryToDecimal = new BinaryToDecimal(Integer.parseInt(textFieldBinary.getText()));
+            if (!Objects.equals(textFieldBinary.getText(), "") && textFieldBinary.getText().length() <= 10) {
+                BinaryToDecimal binaryToDecimal = new BinaryToDecimal(Integer.parseInt(textFieldBinary.getText()));
 
-            textFieldDecimal.setText(binaryToDecimal.result());
+                textFieldDecimal.setText(binaryToDecimal.result());
+            } else {
+                textFieldDecimal.setText("");
+            }
         });
     }
 
